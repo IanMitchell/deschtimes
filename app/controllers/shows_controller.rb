@@ -29,6 +29,9 @@ class ShowsController < ApplicationController
     @show = Show.new(show_params)
     @show.new_show_group = @group
 
+    # Switch from UTC to JST
+    @show.new_show_episode_air_date -= 9.hours
+
     if @show.save
       Project.create(group: @group, show: @show, status: :accepted)
       redirect_to group_show_url(@group, @show)

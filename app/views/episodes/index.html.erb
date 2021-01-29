@@ -32,7 +32,7 @@
                   <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <%= local_time_ago(episode.updated_at) %>
+                  Updated <%= local_time_ago(episode.updated_at) %>
                 </div>
               </div>
               <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
@@ -43,9 +43,9 @@
                   <% if episode.released %>
                     Released!
                   <% elsif episode.aired? %>
-                    Aired <%= local_time(episode.air_date) %>
+                    Aired <%= episode.air_date %>
                   <% else %>
-                    Airs on <%= local_time(episode.air_date) %>
+                    Airs on <%= episode.air_date %>
                   <% end %>
                 </span>
               </div>
