@@ -1,0 +1,2 @@
+class EpisodeIncompleteError < StandardError
+end

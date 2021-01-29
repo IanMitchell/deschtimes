@@ -1,0 +1,32 @@
+<% content_for :title, 'Discord' %>
+
+<div class="relative py-16 bg-white overflow-hidden">
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="text-lg max-w-prose mx-auto mb-6">
+      <p class="text-base text-center leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Discord Bots</p>
+      <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Using Aquarius</h1>
+      <p class="text-xl text-gray-500 leading-8">Aquarius is a Discord bot that has commands for interacting with Deschtimes. If you want to integrate Deschtimes into your own project, check out the API documentation instead.</p>
+    </div>
+    <div class="prose prose-lg text-gray-500 mx-auto">
+      <p>To add Aquarius to your server and enable Deschtimes, follow the guide below:</p>
+      <ol>
+        <li><a href="https://aquarius.sh/link">Add Aquarius to your server</a></li>
+        <li>On your Discord server in a channel Aquarius is also in, type: <pre>.commands add deschtimes</pre>
+        <li>In a <strong>direct message</strong> with Aquarius, type: <pre>set deschtimes token [TOKEN]</pre>Replace [TOKEN] with the token displayed on your Deschtimes group page.</li>
+      </ol>
+      <p>Aquarius is now configured to talk to Deschtimes in your server. To learn more about what it can do, you can type: <pre>.help deschtimes</pre> at any time and it will list its commands.
+
+      <h2>Commands for Members</h2>
+      <p>Members can check on show progress by typing: <pre>.blame [NAME]</pre>Deschtime implements a fuzzy-find search process, so users can identify shows by related terms or by only partially typing its name.</p>
+
+      <h2>Commands for Staff</h2>
+      <p>Staff members can mark their position on the latest unreleased episode as finished or unfinished by typing: <pre>.done [POSITION] [SHOW]<br />.undone [POSITION] [SHOW]</pre>
+      If a staff member is <abbr title="Not you, Areki">particularly efficient</abbr> they can mark their position for later episodes by running: <pre>.done [POSITION] #[EPNUMBER] [SHOW]<br />.undone [POSITION] #[EPNUMBER] [SHOW]</pre></p>
+
+      <p>Group Admins can mark an episode as released once each job is fully finished by typing: <pre>.release [NAME]</pre></p>
+
+      <h2>Support</h2>
+      <p>If you need additional support, you can DM Desch#3091 on Discord.</p>
+    </div>
+  </div>
+</div>

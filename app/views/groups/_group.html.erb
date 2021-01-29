@@ -1,0 +1,15 @@
+<li class="py-10 px-6 bg-gray-800 text-center rounded-lg xl:px-10 xl:text-left">
+  <%= link_to group_url(group) do %>
+    <div class="space-y-6 xl:space-y-10">
+      <div class="w-full flex justify-center">
+        <%= render partial: 'groups/icon', locals: { group: group } %>
+      </div>
+      <div class="space-y-2 xl:flex xl:items-center xl:justify-between">
+        <div class="font-medium text-lg leading-6 space-y-1">
+          <h4 class="text-white"><%= group.fullname %></h4>
+          <p class="text-indigo-400"><%= pluralize(group.shows.active.count, "Active Show") %>, <%= group.shows.count %> Total</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</li>

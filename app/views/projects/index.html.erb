@@ -1,0 +1,83 @@
+<% content_for :title, 'Projects' %>
+
+<div class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <% if @pending.size + @declined.size + @accepted.size == 0 %>
+        <%= render partial: 'layouts/empty', locals: { content: "Your group does not have any joint projects!" } %>
+      <% end %>
+
+      <% if @pending.size > 0 %>
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-8">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Show
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Other Groups
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th class="px-6 py-3 bg-gray-50"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'projects/project', collection: @pending, cached: true, locals: { delete: false } %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+
+      <% if @declined.size > 0 %>
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-8">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Show
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Other Groups
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th class="px-6 py-3 bg-gray-50"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'projects/project', collection: @declined, cached: true, locals: { delete: true } %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+
+      <% if @accepted.size > 0 %>
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Show
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Other Groups
+                </th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th class="px-6 py-3 bg-gray-50"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'projects/project', collection: @accepted, cached: true, locals: { delete: true } %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

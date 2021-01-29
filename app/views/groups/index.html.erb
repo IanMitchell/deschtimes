@@ -1,0 +1,18 @@
+<% content_for :title, 'My Groups' %>
+
+<% content_for :page_actions do %>
+  <%= render partial: "layouts/page_actions", locals: { page_actions: [{ name: 'Create Group', url: new_group_url, highlight: true }]}  %>
+<% end %>
+
+
+<div class="mx-auto py-8 px-4 max-w-screen-xl sm:px-6 lg:px-8">
+  <div class="space-y-12">
+    <% if @groups.empty? %>
+      <%= render partial: 'layouts/empty', locals: { content: "You don't have any Groups!" } %>
+    <% else %>
+      <ul class="space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:grid-cols-3 lg:gap-8">
+        <%= render partial: 'groups/group', collection: @groups, cached: true %>
+      </ul>
+    <% end %>
+  </div>
+</div>

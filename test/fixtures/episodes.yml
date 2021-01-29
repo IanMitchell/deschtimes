@@ -1,0 +1,69 @@
+# == Schema Information
+#
+# Table name: episodes
+#
+#  id         :bigint           not null, primary key
+#  air_date   :datetime
+#  number     :integer
+#  released   :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  show_id    :bigint           not null
+#
+# Indexes
+#
+#  index_episodes_on_released  (released)
+#  index_episodes_on_show_id   (show_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (show_id => shows.id)
+#
+
+invisible_episode_one:
+  show: invisible_show
+  air_date: <%= DateTime.now %>
+  number: 1
+  released: false
+
+visible_episode_one:
+  show: visible_show
+  air_date: <%= DateTime.now - 2.weeks %>
+  number: 1
+  released: true
+
+visible_episode_two:
+  show: visible_show
+  air_date: <%= DateTime.now - 1.week %>
+  number: 2
+  released: false
+
+visible_episode_three:
+  show: visible_show
+  air_date: <%= DateTime.now + 1.week %>
+  number: 3
+  released: false
+
+airing_episode_one:
+  show: search_airing
+  air_date: <%= DateTime.now + 1.week %>
+  number: 1
+  released: false
+
+active_episode_one:
+  show: search_active
+  air_date: <%= DateTime.now - 1.week %>
+  number: 1
+  released: false
+
+complete_episode_one:
+  show: search_complete
+  air_date: <%= DateTime.now - 1.week %>
+  number: 1
+  released: true
+
+joint_episode_one:
+  show: joint_show
+  air_date: <%= DateTime.now - 1.week %>
+  number: 1
+  released: false

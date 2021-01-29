@@ -1,0 +1,118 @@
+<% content_for :title, @show.name %>
+
+<% content_for :page_actions do %>
+  <%= render partial: "layouts/page_actions", locals: { page_actions: [
+    { name: 'View Episodes', url: group_show_episodes_url(@group, @show) },
+    { name: 'Edit Show', url: edit_group_show_url(@group, @show), highlight: true }
+  ]}  %>
+<% end %>
+
+<div class="px-4 py-5 sm:p-6">
+  <dl class="grid grid-cols-1 gap-x-4 gap-y-8 grid-flow-row-dense sm:grid-cols-2">
+    <div class="sm:col-span-1">
+      <div class="w-full sm:w-36 md:w-52 lg:w-64 m-auto">
+        <div class="relative h-0 pb-2/3 sm:pt-2/3">
+          <% if @show.poster.attached? %>
+            <%= image_tag url_for(@show.poster), alt: "#{@show.name} Poster", class: "absolute inset-0 object-cover h-full w-full shadow-lg rounded-lg" %>
+          <% else %>
+            <div class="absolute inset-0 object-cover h-full w-full shadow-lg rounded-lg bg-gradient-to-r from-orange-400 via-red-500 to-pink-500"></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="sm:col-span-1">
+      <dt class="text-sm leading-5 font-medium text-gray-500">
+        Name
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900">
+        <%= @show.name %>
+      </dd>
+      <dt class="mt-4 text-sm leading-5 font-medium text-gray-500">
+        Visibility
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900">
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 <%= @show.visible ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>">
+          <%= @show.visible ? "Public" : "Hidden" %>
+        </span>
+      </dd>
+      <dt class="mt-4 text-sm leading-5 font-medium text-gray-500">
+        Status
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900">
+        <%= @show.status || "No Status" %>
+      </dd>
+      <dt class="mt-4 text-sm leading-5 font-medium text-gray-500">
+        Season
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900">
+        <%= @show.season %>
+      </dd>
+    </div>
+  </dl>
+  <dl class="mt-6">
+    <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+      <dt class="text-sm leading-5 font-medium text-gray-500">
+        Terms
+
+        <div class="mt-4">
+          <span class="shadow-sm rounded-md">
+            <%= link_to "Add Term", new_group_show_term_url(@group, @show), class: "inline-flex items-center px-4 py-2 border text-sm leading-5 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out border-transparent text-white bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700" %>
+          </span>
+        </div>
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+        <% if @show.terms.any? %>
+          <ul class="border border-gray-200 rounded-md">
+            <% @show.terms.each_with_index do |term, index| %>
+              <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5 <%= "border-t border-gray-200 " if index > 0 %>"%>
+                <div class="w-0 flex-1 flex items-center">
+                  <span class="ml-2 flex-1 w-0 truncate">
+                    <%= term.name %>
+                  </span>
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                  <%= link_to "Delete", group_show_term_url(@group, @show, term), method: :delete, data: { confirm: "Do you wish to delete the term \"#{term.name}\"?" }, class: "font-medium text-red-600 hover:text-red-500 transition duration-150 ease-in-out" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </dd>
+    </div>
+
+    <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+      <dt class="text-sm leading-5 font-medium text-gray-500">
+        Joint Groups
+        <div class="mt-4">
+          <span class="shadow-sm rounded-md">
+            <%= link_to "Add Group", new_group_show_project_url(@group, @show), class: "inline-flex items-center px-4 py-2 border text-sm leading-5 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out border-transparent text-white bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700" %>
+          </span>
+        </div>
+      </dt>
+      <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+        <% if @show.projects.size > 1 %>
+          <ul class="border border-gray-200 rounded-md">
+            <% @show.projects.where.not(projects: { group: @group }).each_with_index do |project, index| %>
+              <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5 <%= "border-t border-gray-200" if index > 0 %>">
+                <div class="w-0 flex-1 flex items-center">
+                  <%= render partial: 'groups/icon', locals: { group: project.group, width: "w-5", height: "h-5" } %>
+                  <span class="ml-2 flex-1 w-0 truncate">
+                    <%= project.group.fullname %>
+                  </span>
+                  <% if project.pending? %>
+                    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 <%= status_color_classes(project.status) %>">
+                      <%= project.status.titleize %>
+                    </span>
+                  <% end %>
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                  <%= link_to "Remove", group_show_project_url(project.group, @show, project, status: :declined), method: :patch, data: { confirm: "Do you wish to remove #{project.group.name} from this project?" }, class: "font-medium text-red-600 hover:text-red-500 transition duration-150 ease-in-out" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </dd>
+    </div>
+  </dl>
+</div>

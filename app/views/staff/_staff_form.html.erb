@@ -1,0 +1,17 @@
+<div class="mt-12 md:mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2" data-controller="removable" data-target="removable.container">
+  <div class="sm:col-span-1">
+    <%= form.label :position, class: "block text-sm font-medium leading-5 text-gray-700" %>
+    <div class="mt-1 rounded-md shadow-sm">
+      <%= form.select :position, @group.positions.map {|position| [position.name, position.id]}, { selected: selected_position.id }, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
+    </div>
+
+    <button data-action="removable#remove" class="block mt-2 text-xs text-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:text-red-800 transition duration-150 ease-in-out" type="button">Remove</button>
+  </div>
+
+  <div class="sm:col-span-1">
+    <%= form.label :member, class: "block text-sm font-medium leading-5 text-gray-700" %>
+    <div class="mt-1 rounded-md shadow-sm">
+      <%= form.select :member, @group.members.map {|member| [member.name, member.id]}, {}, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
+    </div>
+  </div>
+</div>

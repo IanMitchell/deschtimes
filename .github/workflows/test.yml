@@ -1,0 +1,52 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.6
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: showtimes_test
+          POSTGRES_PASSWORD: ""
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup PostgreSQL
+        run: |
+          sudo apt-get -y install libpq-dev
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+          bundler-cache: true
+      - name: Setup Database
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          DATABASE_USERNAME: postgres
+          RAILS_ENV: test
+        run: |
+          bin/rails db:setup
+      - name: Yarn Install
+        run: bin/rails yarn:install
+      - name: Compile Assets
+        run: bin/rails webpacker:compile
+      - name: Rails Tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          DATABASE_USERNAME: postgres
+          RAILS_ENV: test
+        run: |
+          bin/rails test

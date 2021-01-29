@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: groups
+#
+#  id         :bigint           not null, primary key
+#  acronym    :string           not null
+#  name       :string           not null
+#  slug       :string
+#  token      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_groups_on_acronym  (acronym) UNIQUE
+#  index_groups_on_name     (name) UNIQUE
+#  index_groups_on_slug     (slug) UNIQUE
+#  index_groups_on_token    (token) UNIQUE
+#
+
+cartel:
+  acronym: CAR
+  name: Cartel
+  token: cartel_token
+
+trinity:
+  acronym: TRI
+  name: Trinity
+  token: trinity_token

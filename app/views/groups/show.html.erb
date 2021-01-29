@@ -1,0 +1,215 @@
+<% content_for :title, @group.name %>
+
+<% content_for :page_actions do %>
+  <%= render partial: "layouts/page_actions", locals: { page_actions: [{ name: 'Edit Group', url: edit_group_url(@group), highlight: true }]}  %>
+<% end %>
+
+<div class="w-full grid grid-cols-1 gap-5 sm:grid-cols-2">
+  <div class="flex justify-start items-center space-x-4 lg:space-x-6">
+    <%= render partial: 'groups/icon', locals: { group: @group } %>
+    <div class="font-medium text-2xl leading-6 space-y-1">
+      <h4 class="text-indigo-600"><%= @group.name %></h4>
+      <p>[<%= @group.acronym %>]</p>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 sm:rounded-lg" data-controller="clipboard">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Token
+      </h3>
+      <div class="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+        <p>
+          Use this with bots (such as <%= link_to "Aquarius", documentation_discord_url, class: "text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>) to interact with Deschtimes.
+        </p>
+      </div>
+      <div class="mt-5">
+        <p class="font-mono" data-target="clipboard.source"><%= @group.token %></p>
+      </div>
+      <div class="mt-5">
+        <span class="inline-flex rounded-md shadow-sm">
+          <%= link_to "Regenerate", group_token_url(@group), method: :put, data: { confirm: "Regenerating your token will invalidate the current one. Continue?" }, class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150" %>
+        </span>
+        <span class="ml-3inline-flex rounded-md shadow-sm">
+          <button data-action="clipboard#copy" data-target="clipboard.button" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">Copy</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <%= link_to group_shows_url(@group), class: "block bg-white overflow-hidden shadow rounded-lg" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Shows
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.shows.count %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to group_members_url(@group), class: "block bg-white overflow-hidden shadow rounded-lg" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Total Members
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.members.size %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to group_positions_url(@group), class: "bg-white overflow-hidden shadow rounded-lg block" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Positions
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.positions.size %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5" data-controller="confirmable">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to group_webhooks_url(@group), class: "block bg-white overflow-hidden shadow rounded-lg" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Webhooks
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.webhooks.count %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to group_users_url(@group), class: "block bg-white overflow-hidden shadow rounded-lg" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Authorized Users
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.users.count %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+
+    <%= link_to group_projects_url(@group), class: "block bg-white overflow-hidden shadow rounded-lg" do %>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+              Pending Joint Invitations
+            </dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl leading-8 font-semibold text-gray-900">
+                <%= @group.projects.where(status: :pending).count %>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+      <div class="text-sm leading-5">
+        <span class="font-medium text-indigo-600">Manage</span>
+      </div>
+    </div>
+  <% end %>
+</div>

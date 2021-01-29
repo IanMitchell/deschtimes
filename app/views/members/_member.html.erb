@@ -1,0 +1,24 @@
+<tr class="<%= cycle("bg-white", "bg-gray-50") %>">
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
+    <%= member.name %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+    <%= member.discord %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+    <%= member.staff.size %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+    <% if member.admin? %>
+      <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800">
+        Admin
+      </span>
+    <% end %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+    <%= link_to "Edit", edit_group_member_url(@group, member), class: "text-indigo-600 hover:text-indigo-900" %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+    <%= link_to "Delete", group_member_url(@group, member), method: :delete, data: { confirm: "Do you wish to delete #{member.name}? This will also delete any staff positions they are members of!" }, class: "text-red-600 hover:text-red-900" %>
+  </td>
+</tr>

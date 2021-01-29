@@ -1,0 +1,72 @@
+<% content_for :title, 'API' %>
+
+<div class="py-8 px-4 sm:px-6 lg:px-8">
+  <div class="text-lg max-w-prose mx-auto mb-6">
+    <p class="text-base text-center leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Deschtimes</p>
+    <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">API Documentation</h1>
+    <p class="text-xl text-gray-500 leading-8">Deschtimes provides a limited API you can work with to update and manage your tracked shows.</p>
+  </div>
+  <div class="prose prose-lg text-gray-500 mx-auto">
+    <p>Most API calls require you to use your unique group Token. It's important to keep this token hidden - anyone who has access to it can use it to make updates to your information. <strong>Do not put your token in client-side JavaScript Code.</strong></p>
+    <p>The API is RESTful - each HTTP method is displayed in the section header. To find your token, visit your Group page.</p>
+
+    <h2>Groups API</h2>
+    <h4>GET Group Information</h4>
+    <pre>https://deschtimes.com/api/v1/groups/:token.json</pre>
+    <p>Returns information about a Group on Deschtimes, including all their shows and episodes for those shows.</p>
+    <table>
+      <thead>
+        <tr><td>Name</td><td>Description</td></tr>
+      </thead>
+      <tbody>
+        <tr><td>Token</td><td>The unique Group token. This can be found on your Group page.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Shows API</h2>
+    <h4>GET Show Information</h4>
+    <pre>https://deschtimes.com/api/v1/groups/:token/shows/:name.json</pre>
+    <p>Returns information about the found show, including the staff information and status for each episode.</p>
+
+    <h2>Episodes API</h2>
+    <h4>PATCH Episode Status</h4>
+    <pre>https://deschtimes.com/api/v1/groups/:token/shows/:name/episodes.json</pre>
+    <p>This method marks the latest unreleased episode as released. It requires an admin user to perform this action - for Discord pass in the User ID. For usage on other platforms, you should make a new admin Member with a static ID to pass through here.</p>
+    <h4>Formbody Payload</h4>
+    <table>
+      <thead>
+        <tr><td>Name</td><td>Description</td></tr>
+      </thead>
+      <tbody>
+        <tr><td>member</td><td>The Discord ID of a user to verify they have permission to perform the action.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Staff API</h2>
+    <h4>PATCH Episode Staff</h4>
+    <pre>https://deschtimes.com/api/v1/groups/:token/shows/:name/staff.json</pre>
+    <p>This endpoint will mark the staff position for a specified episode or the most recent unreleased episode as finished or unfinished. For non-admin users, they must be assigned the position being marked. For admin users, if they have an assigned role for the position being passed in it will be prioritized if the current status does not match. If the current status does match, the first staff member for that role with a position not matching will be marked instead.</p>
+
+    <h4>Formbody Payload</h4>
+    <table>
+      <thead>
+        <tr><td>Name</td><td>Description</td></tr>
+      </thead>
+      <tbody>
+        <tr><td>member</td><td>The Discord ID of a user to verify they have permission to perform the action.</td></tr>
+        <tr><td>finished</td><td>"true" if the position should be marked as completed, "false" if it should be marked as incomplete.</td></tr>
+        <tr><td>position</td><td>The Position Name or Acronym to mark complete</td></tr>
+        <tr><td>episode_number</td><td><strong>[OPTIONAL]</strong> If set, the corresponding episode number will be marked instead of the most recent unreleased episode.</td></tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h1>Creating a Project Tracker Widget</h1>
+    <p>Using the Group API you can create a widget on your website that lists all of your active projects by doing the following:</p>
+    <p><strong><em>Coming Soon!</em></strong></p>
+
+    <h1>Creating a Projects Page</h1>
+    <p>Using the Group API you can create a page on your website that lists all your projects and staff members by doing the following:</p>
+    <p><strong><em>Coming Soon!</em></strong></p>
+</div>

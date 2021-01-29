@@ -1,0 +1,19 @@
+<tr class="<%= cycle("bg-white", "bg-gray-50") %>">
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
+    <%= webhook.name %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+    <%= link_to "Webhook Link", webhook.url, class: "text-indigo-600 hover:text-indigo-900" %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 <%= platform_color_classes(webhook.platform) %>">
+      <%= webhook.platform.titleize %>
+    </span>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+    <%= link_to "Edit", edit_group_webhook_url(@group, webhook), class: "text-indigo-600 hover:text-indigo-900" %>
+  </td>
+  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+    <%= link_to "Delete", group_webhook_url(@group, webhook), method: :delete, data: { confirm: "Do you wish to delete #{webhook.name}?" }, class: "text-red-600 hover:text-red-900" %>
+  </td>
+</tr>

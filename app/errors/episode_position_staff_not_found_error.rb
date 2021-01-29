@@ -1,0 +1,2 @@
+class EpisodePositionStaffNotFoundError < StandardError
+end

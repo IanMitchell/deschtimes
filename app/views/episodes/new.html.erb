@@ -1,0 +1,65 @@
+<% content_for :title, "Add #{@show.name} episode" %>
+
+<%= form_with model: [@group, @show, @episode], local: true, html: { multipart: true } do |f| %>
+
+  <%= render partial: "layouts/errors", locals: { record: @show } %>
+
+  <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+    <%= f.label :number, "Episode Number", class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+    <div class="mt-1 sm:mt-0 sm:col-span-2">
+      <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+        <%= f.number_field :number, class: "js-datetime-picker form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+    <%= f.label :air_date, "Air Date", class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+    <div class="mt-1 sm:mt-0 sm:col-span-2">
+      <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+        <%= f.datetime_field :air_date, class: "js-datetime-picker form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 sm:mt-5">
+    <div class="mt-6 sm:mt-5">
+      <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+        <div role="group" aria-labelledby="label-email">
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+            <div>
+              <div class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700" id="label-email">
+                Released
+              </div>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:col-span-2">
+              <div class="max-w-lg">
+                <div class="relative flex items-start">
+                  <div class="flex items-center h-5">
+                    <%= f.check_box :released, { class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" } %>
+                  </div>
+                  <div class="ml-3 text-sm leading-5">
+                    <%= f.label :released, class: "font-medium text-gray-700" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 border-t border-gray-200 pt-5">
+    <div class="flex justify-end">
+      <span class="inline-flex rounded-md shadow-sm">
+        <%= link_to "Cancel", group_show_episodes_url(@group, @show), class: "py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out" %>
+      </span>
+      <span class="ml-3 inline-flex rounded-md shadow-sm">
+        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+          Add Episode
+        </button>
+      </span>
+    </div>
+  </div>
+<% end %>

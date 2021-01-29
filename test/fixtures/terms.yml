@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: terms
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  show_id    :bigint           not null
+#
+# Indexes
+#
+#  index_terms_on_show_id  (show_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (show_id => shows.id)
+#
+
+secret:
+  show: hidden_show
+  name: secret
+
+public:
+  show: visible_show
+  name: public
+
+fuzzy_search_exact:
+  show: fuzzy_find_show
+  name: exact

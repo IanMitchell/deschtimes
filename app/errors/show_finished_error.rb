@@ -1,0 +1,2 @@
+class ShowFinishedError < StandardError
+end

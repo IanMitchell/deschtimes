@@ -1,0 +1,20 @@
+<%= content_for :content do %>
+  <div class="relative bg-gray-800 overflow-hidden h-screen">
+    <div class="relative pt-6 pb-12 sm:pb-32">
+      <main class="mt-4 md:mt-8">
+        <div class="mx-auto max-w-screen-md">
+            <div class="p-12 flex flex-col justify-center sm:py-12 w-full mx-auto">
+              <div class="relative py-3 sm:mx-auto w-full">
+                <div class="absolute inset-0 bg-gradient-to-r from-teal-400 to-blue-400 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
+                <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-10">
+                  <%= yield %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+<% end %>
+<%= render template: "layouts/base" %>

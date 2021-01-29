@@ -1,0 +1,2 @@
+class UnairedEpisodeError < StandardError
+end

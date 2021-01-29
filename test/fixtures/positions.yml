@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: positions
+#
+#  id         :bigint           not null, primary key
+#  acronym    :string           not null
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  group_id   :bigint           not null
+#
+# Indexes
+#
+#  index_positions_on_acronym   (acronym)
+#  index_positions_on_group_id  (group_id)
+#  index_positions_on_name      (name)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_id => groups.id)
+#
+
+translator:
+  name: Translator
+  acronym: TL
+  group: cartel
+
+timer:
+  name: Timer
+  acronym: TM
+  group: cartel

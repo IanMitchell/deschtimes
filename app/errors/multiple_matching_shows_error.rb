@@ -1,0 +1,2 @@
+class MultipleMatchingShowsError < StandardError
+end

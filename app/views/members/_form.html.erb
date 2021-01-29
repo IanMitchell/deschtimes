@@ -1,0 +1,69 @@
+<%= form_with model: [@group, @member], local: true do |f| %>
+  <h3 class="text-lg leading-6 font-medium text-gray-900">
+    Information
+  </h3>
+  <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+    Group members can interact with Deschtimes to mark their progress on Staff positions as complete or incomplete.
+  </p>
+
+  <%= render partial: "layouts/errors", locals: { record: @member } %>
+
+  <div class="mt-12">
+    <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+      <%= f.label :name, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+      <div class="mt-1 sm:mt-0 sm:col-span-2">
+        <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+          <%= f.text_field :name, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+      <%= f.label :discord, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+      <div class="mt-1 sm:mt-0 sm:col-span-2">
+        <%# <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs"> %>
+        <div class="max-w-lg sm:max-w-xs">
+          <%= render partial: 'forms/text_input', locals: { f: f, record: @member, key: :discord } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 sm:mt-5">
+        <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+          <div role="group" aria-labelledby="label-email">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+              <div>
+                <div class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700" id="label-email">
+                  Permissions
+                </div>
+              </div>
+              <div class="mt-4 sm:mt-0 sm:col-span-2">
+                <div class="max-w-lg">
+                  <div class="relative flex items-start">
+                    <div class="flex items-center h-5">
+                      <%= f.check_box :admin, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                    </div>
+                    <div class="ml-3 text-sm leading-5">
+                      <%= f.label :admin, class: "font-medium text-gray-700" %>
+                      <p class="text-gray-500">Member can mark any position as finished and can release episodes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <div class="mt-8 border-t border-gray-200 pt-5">
+    <div class="flex justify-end">
+      <span class="inline-flex rounded-md shadow-sm">
+        <%= link_to "Cancel", group_members_url(@group), class: "py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out" %>
+      </span>
+      <span class="ml-3 inline-flex rounded-md shadow-sm">
+        <%= f.submit @member.new_record? ? "Create Member" : "Edit Member", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+      </span>
+    </div>
+  </div>
+<% end %>

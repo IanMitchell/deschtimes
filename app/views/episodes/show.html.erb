@@ -1,0 +1,67 @@
+<% content_for :title, "Episode #{@episode.number}" %>
+
+<% content_for :page_actions do %>
+  <%= render partial: "layouts/page_actions", locals: { page_actions: [{ name: 'Add Staff', url: new_group_show_episode_staff_url(@group, @show, @episode) }, { name: 'Edit Episode', url: edit_group_show_episode_url(@group, @show, @episode), highlight: true }]}  %>
+<% end %>
+
+<dl class="sm:divide-y sm:divide-gray-200">
+  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <dt class="text-sm font-medium text-gray-500">
+      Released
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= @episode.released ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>">
+        <%= @episode.released ? "Released" : "Unreleased" %>
+      </span>
+    </dd>
+  </div>
+  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <dt class="text-sm font-medium text-gray-500">
+      Air Date
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= @episode.air_date %>
+    </dd>
+  </div>
+  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <dt class="text-sm font-medium text-gray-500">
+      Last Update
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= local_time(@episode.updated_at) %>
+    </dd>
+  </div>
+
+  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <dt class="text-sm font-medium text-gray-500">
+      Staff
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+        <% @episode.staff.each do |staff| %>
+          <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+            <div class="w-0 flex-1 flex items-center">
+              <% if staff.finished %>
+                <svg class="flex-shrink-0 h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              <% else %>
+                <svg class="flex-shrink-0 h-5 w-5 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              <% end %>
+              <span class="ml-2 flex-1 w-0 truncate">
+                <%= staff.title(@show.joint?) %>
+              </span>
+            </div>
+            <div class="ml-4 flex-shrink-0 flex space-x-4">
+              <%= link_to "Update", edit_group_show_episode_staff_url(@group, @show, @episode, staff), class: "bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+              <span class="text-gray-300" aria-hidden="true">|</span>
+              <%= link_to "Remove", group_show_episode_staff_url(@group, @show, @episode, staff), method: :delete, data: { confirm: "Do you wish to remove\"#{staff.title(@show.joint?)}\"?" }, class: "bg-white rounded-md font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </dd>
+  </div>
+</dl>

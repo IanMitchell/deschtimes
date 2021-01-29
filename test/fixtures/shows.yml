@@ -1,0 +1,52 @@
+# == Schema Information
+#
+# Table name: shows
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  status     :text
+#  visible    :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_shows_on_name     (name)
+#  index_shows_on_visible  (visible)
+#
+
+hidden_show:
+  name: Hidden Show
+  visible: false
+
+visible_show:
+  name: Visible Show
+  visible: true
+
+fuzzy_find_show_multiple:
+ name: Fuzzy Find Show Multiple
+ visible: true
+
+fuzzy_find_show:
+  name: Fuzzy Find Show
+  visible: true
+
+search_airing:
+  name: Airing Show CommonSearchTerm
+  visible: true
+
+search_active:
+  name: Active Show CommonSearchTerm
+  visible: true
+
+search_complete:
+  name: Complete Show CommonSearchTerm
+  visible: true
+
+trinity_show:
+  name: Trinity Show
+  visible: true
+
+joint_show:
+  name: Joint Show
+  visible: true

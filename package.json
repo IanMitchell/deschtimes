@@ -1,0 +1,22 @@
+{
+  "name": "deschtimes",
+  "private": true,
+  "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.3.0",
+    "@tailwindcss/ui": "^0.6.2",
+    "alpinejs": "^2.7.2",
+    "autoprefixer": "^9.0.0",
+    "flatpickr": "^4.6.8",
+    "local-time": "^2.1.0",
+    "stimulus": "^1.1.1",
+    "tailwindcss": "^1.9.5",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

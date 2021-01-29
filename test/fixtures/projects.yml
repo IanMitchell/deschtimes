@@ -1,0 +1,73 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id         :bigint           not null, primary key
+#  status     :integer          default("pending")
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  group_id   :bigint           not null
+#  show_id    :bigint           not null
+#
+# Indexes
+#
+#  index_projects_on_group_id              (group_id)
+#  index_projects_on_group_id_and_show_id  (group_id,show_id) UNIQUE
+#  index_projects_on_show_id               (show_id)
+#  index_projects_on_status                (status)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_id => groups.id)
+#  fk_rails_...  (show_id => shows.id)
+#
+
+cartel_hidden_show:
+  show: hidden_show
+  group: cartel
+  status: accepted
+
+cartel_visible_show:
+  show: visible_show
+  group: cartel
+  status: accepted
+
+cartel_fuzzy_find_show:
+  show: fuzzy_find_show
+  group: cartel
+  status: accepted
+
+cartel_fuzzy_find_show_multiple:
+  show: fuzzy_find_show_multiple
+  group: cartel
+  status: accepted
+
+cartel_airing_search:
+  show: search_airing
+  group: cartel
+  status: accepted
+
+cartel_search_active:
+  show: search_active
+  group: cartel
+  status: accepted
+
+cartel_search_complete:
+  show: search_complete
+  group: cartel
+  status: accepted
+
+trinity_single_show:
+  show: trinity_show
+  group: trinity
+  status: accepted
+
+trinity_joint_show:
+  show: joint_show
+  group: trinity
+  status: accepted
+
+cartel_joint_show:
+  show: joint_show
+  group: cartel
+  status: accepted
