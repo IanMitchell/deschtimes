@@ -7,8 +7,4 @@ Sentry.init do |config|
   # config.async = lambda { |event|
   #   SentryJob.perform_later(event)
   # }
-
-  config.traces_sampler = lambda do |context|
-    Rails.env.production?
-  end
 end
