@@ -4,9 +4,9 @@ Sentry.init do |config|
 
   config.enabled_environments = %w[production]
 
-  config.async = lambda { |event|
-    SentryJob.perform_later(event)
-  }
+  # config.async = lambda { |event|
+  #   SentryJob.perform_later(event)
+  # }
 
   config.traces_sampler = lambda do |context|
     Rails.env.production?
