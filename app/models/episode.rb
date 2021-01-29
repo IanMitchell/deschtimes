@@ -120,7 +120,7 @@ class Episode < ApplicationRecord
 
       if show.current_unreleased_episode&.aired?
         embed.add_field name: 'Current Status',
-                        value: episode.discord_status_label.join(" ")
+                        value: show.current_unreleased_episode.discord_status_label.join(" ")
       elsif show.current_unreleased_episode
         embed.add_field name: 'Next Air Date',
                         value: distance_of_time_in_words(DateTime.now, show.current_unreleased_episode.air_date)
