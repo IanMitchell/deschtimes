@@ -43,9 +43,9 @@
                   <% if episode.released %>
                     Released!
                   <% elsif episode.aired? %>
-                    Aired <%= episode.air_date %>
+                    Aired <%= local_time(episode.air_date) %>
                   <% else %>
-                    Airs on <%= episode.air_date %>
+                    Airs on <%= local_time(episode.air_date) %>
                   <% end %>
                 </span>
               </div>
