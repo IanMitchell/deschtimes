@@ -124,13 +124,13 @@ namespace :data_migration do
     # Import Staff
     puts "Migrating Staff..."
     old_positions = {
-      1 => "Translator",
-      2 => "Translator Check",
-      3 => "Encoder",
-      4 => "Editor",
-      5 => "Timer",
-      6 => "Typesetter",
-      7 => "Quality Control"
+      "1" => "Translator",
+      "2" => "Translator Check",
+      "3" => "Encoder",
+      "4" => "Editor",
+      "5" => "Timer",
+      "6" => "Typesetter",
+      "7" => "Quality Control"
     }
 
     CSV.foreach("#{Rails.root}/lib/assets/data/staff.csv", headers: true, header_converters: :symbol) do |row|
