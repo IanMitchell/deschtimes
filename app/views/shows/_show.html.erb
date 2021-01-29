@@ -22,7 +22,11 @@
               <%= show.name %>
             <% end %>
           </h4>
-          <p>Episode <%= show.current_unreleased_episode&.number || '-' %>/<%= show.last_episode&.number || '-' %></p>
+          <% if show.finished? %>
+            <p><%= pluralize show.episodes.size, "episode" %> released!</p>
+          <% else %>
+            <p>Episode <%= show.current_unreleased_episode&.number || '-' %>/<%= show.last_episode&.number || '-' %></p>
+          <% end %>
         </div>
         <div class="text-lg text-gray-500 leading-7">
           <p>There is no status message.</p>
