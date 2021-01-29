@@ -269,6 +269,7 @@ DEPENDENCIES
   pg_search
   puma (~> 5.1)
   rails (~> 6.1.1)
+  redis
   rexml
   sass-rails (>= 6)
   selenium-webdriver
