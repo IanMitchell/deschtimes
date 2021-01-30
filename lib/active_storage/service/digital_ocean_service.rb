@@ -6,7 +6,7 @@ require 'active_support/core_ext/numeric/bytes'
 # https://github.com/rails/rails/issues/32790#issuecomment-487523740
 # https://github.com/rails/rails/issues/41070#issue-782795111
 module ActiveStorage
-  class Service::BetterS3Service < Service::S3Service
+  class Service::DigitalOceanService < Service::S3Service
     attr_reader :client, :bucket, :root, :upload_options
 
     def initialize(bucket:, upload: {}, **options)
