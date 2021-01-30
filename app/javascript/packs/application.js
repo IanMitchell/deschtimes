@@ -17,6 +17,7 @@ require('channels');
 import '../css/application.css';
 
 import 'controllers';
+import * as ActiveStorage from '@rails/activestorage';
 import LocalTime from 'local-time';
 import flatpickr from 'flatpickr';
 
@@ -45,3 +46,4 @@ document.addEventListener('turbolinks:load', () => {
 });
 
 LocalTime.start();
+ActiveStorage.start();

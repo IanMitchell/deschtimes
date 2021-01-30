@@ -30,6 +30,7 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 gem 'discord-notifier'
 gem 'activestorage-validator'
+gem "aws-sdk-s3", require: false
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
