@@ -23,10 +23,9 @@ module ActiveStorage
     end
 
     private
-
-    def object_for(key)
-      path = root.present? ? File.join(root, key) : key
-      bucket.object(path)
-    end
+      def object_for(key)
+        path = root.present? ? File.join(root, key) : key
+        bucket.object(path)
+      end
   end
 end
