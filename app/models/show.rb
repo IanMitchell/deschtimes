@@ -81,8 +81,7 @@ class Show < ApplicationRecord
 
   def reschedule_episodes(episode)
     episodes.where("number > ?", episode.number).order(number: :asc).each_with_index do |ep, index|
-      ep.air_date = episode.air_date + index.weeks
-      ep.save
+      ep.update(air_date: episode.air_date + (1 + index).weeks)
     end
   end
 
@@ -141,8 +140,7 @@ class Show < ApplicationRecord
       offset = new_show_episode_number_start.to_i.abs
 
       # Switch from UTC to JST
-      air_date = new_show_episode_air_date.to_datetime || DateTime.now
-      air_date -= 9.hours
+      air_date = Time.find_zone("JST").parse(new_show_episode_air_date) || DateTime.now
 
       new_show_episode_count.to_i.clamp(0, 5_000).times do |index|
         episode = episodes.build(
