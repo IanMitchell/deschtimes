@@ -38,3 +38,5 @@ digitalocean:
   endpoint: sfo3.digitaloceanspaces.com
   access_key_id: <%= Rails.application.credentials.dig(:digitalocean, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret_access_key) %>
+  bucket: deschtimes
+  public: true
