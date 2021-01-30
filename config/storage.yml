@@ -35,7 +35,8 @@ local:
 
 digitalocean:
   service: S3
-  endpoint: sfo3.digitaloceanspaces.com
+  endpoint: https://sfo3.digitaloceanspaces.com
+  region: sfo3
   access_key_id: <%= Rails.application.credentials.dig(:digitalocean, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret_access_key) %>
   bucket: deschtimes
