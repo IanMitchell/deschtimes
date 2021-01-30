@@ -44,7 +44,7 @@ class Staff < ApplicationRecord
       return unless episode.show.visible?
 
       staff = self
-      thumbnail = Rails.application.routes.url_helpers.rails_blob_path(episode.show.poster, disposition: "attachment") if episode.show.poster.attached?
+      thumbnail = Rails.application.routes.url_helpers.rails_blob_url(episode.show.poster, disposition: "attachment") if episode.show.poster.attached?
 
       embed = Discord::Embed.new do
         title staff.episode.show.name
@@ -69,7 +69,7 @@ class Staff < ApplicationRecord
         avatar = nil
 
         if webhook.group.icon.attached?
-          avatar = Rails.application.routes.url_helpers.rails_blob_path(webhook.group.icon, disposition: "attachment")
+          avatar = Rails.application.routes.url_helpers.rails_blob_url(webhook.group.icon, disposition: "attachment")
         end
 
         Discord::Notifier.message embed,
