@@ -139,7 +139,10 @@ class Show < ApplicationRecord
     def create_episodes
       group = new_show_group
       offset = new_show_episode_number_start.to_i.abs
+
+      # Switch from UTC to JST
       air_date = new_show_episode_air_date.to_datetime || DateTime.now
+      air_date -= 9.hours
 
       new_show_episode_count.to_i.clamp(0, 5_000).times do |index|
         episode = episodes.build(
