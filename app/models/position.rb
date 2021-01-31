@@ -30,6 +30,7 @@ class Position < ApplicationRecord
                    }
 
   validates :acronym, presence: true,
+                      format: { with: /\A[a-zA-Z0-9]+\Z/ },
                       uniqueness: {
                         scope: :group,
                         message: "Position Acronyms must be unique."

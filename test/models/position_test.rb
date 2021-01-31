@@ -39,4 +39,8 @@ class PositionTest < ActiveSupport::TestCase
       Group.find_by(name: 'Cartel').positions.find_by_name_or_acronym!("Nonexistant")
     end
   end
+
+  test "should not allow spaces in acronym" do
+    assert Position.new(name: 'Invalid', acronym: 'No Spaces', group: Group.first).invalid?
+  end
 end
