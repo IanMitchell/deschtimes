@@ -3,7 +3,14 @@ json.name show.name
 json.status show.progress_label
 json.created_at show.created_at
 json.updated_at show.updated_at
-json.poster if show.poster.attached? ? show.poster.blob.service_url : nil
+
+if show.poster.attached?
+  # Circumvent redirects
+  json.poster show.poster.blob.service_url if Rails.env.production?
+  json.poster url_for(show.poster) unless Rails.env.production?
+else
+  json.poster nil
+end
 
 json.joint_groups do
   json.partial! 'api/v1/groups/group', collection: show.groups.where.not(id: @group.id), as: :group, cached: true
