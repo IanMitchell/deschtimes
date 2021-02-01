@@ -11,7 +11,8 @@
     "autoprefixer": "^9.0.0",
     "flatpickr": "^4.6.8",
     "local-time": "^2.1.0",
-    "stimulus": "^1.1.1",
+    "sortablejs": "^1.13.0",
+    "stimulus": "^2.0.0",
     "tailwindcss": "^1.9.5",
     "turbolinks": "^5.2.0"
   },

@@ -1,4 +1,9 @@
-<tr class="<%= cycle("bg-white", "bg-gray-50") %>">
+<tr class="bg-white" data-sortable-update-url="<%= group_position_url(@group, position) %>">
+  <td>
+    <svg class="handle w-4 h-4 mr-auto ml-auto cursor-move" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+   </svg>
+  </td>
   <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
     <%= position.name %>
   </td>

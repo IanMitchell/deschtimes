@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  acronym    :string           not null
 #  name       :string           not null
+#  rank       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  group_id   :bigint           not null

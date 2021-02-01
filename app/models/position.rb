@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  acronym    :string           not null
 #  name       :string           not null
+#  rank       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  group_id   :bigint           not null
@@ -22,6 +23,8 @@
 class Position < ApplicationRecord
   has_many :staff, dependent: :destroy
   belongs_to :group
+
+  acts_as_list scope: :group, column: :rank
 
   validates :name, presence: true,
                    uniqueness: {

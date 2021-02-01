@@ -24,7 +24,7 @@ require 'action_view/helpers'
 include ActionView::Helpers::DateHelper
 
 class Episode < ApplicationRecord
-  has_many :staff, dependent: :destroy
+  has_many :staff, -> { joins(:position).order(rank: :asc) }, dependent: :destroy
   belongs_to :show, touch: true
 
   after_update :notify_release, if: :saved_change_to_released?
