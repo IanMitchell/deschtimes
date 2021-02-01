@@ -24,7 +24,7 @@
 #
 class Staff < ApplicationRecord
   belongs_to :member
-  belongs_to :episode
+  belongs_to :episode, touch: true
   belongs_to :position
 
   after_update :notify_update, if: :saved_change_to_finished?
