@@ -68,11 +68,11 @@ class Show < ApplicationRecord
   end
 
   def first_episode
-    episodes.order(air_date: :asc).first
+    episodes.order(number: :asc).first
   end
 
   def last_episode
-    episodes.order(air_date: :desc).first
+    episodes.order(number: :desc).first
   end
 
   def reschedule_episodes(episode)
