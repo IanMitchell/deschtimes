@@ -30,7 +30,7 @@ class Show < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :all_groups, through: :projects
   has_many :terms, dependent: :destroy
-  has_many :episodes, dependent: :destroy
+  has_many :episodes, -> { order(number: :asc) }, dependent: :destroy
   has_one_attached :poster
 
   pg_search_scope :search, against: [:name]

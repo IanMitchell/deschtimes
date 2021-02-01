@@ -79,7 +79,7 @@ class Episode < ApplicationRecord
       return job unless job.nil?
 
       # Return first matching results
-      return results.first
+      return results.where(finished: !finished).first
     end
   end
 

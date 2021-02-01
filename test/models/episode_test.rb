@@ -74,4 +74,22 @@ class EpisodeTest < ActiveSupport::TestCase
     staff = episode.find_staff_for_member_and_position!(member, position, finishing)
     assert_equal group.members.find_by(name: 'Fyurie'), staff.member
   end
+
+  test "admins should be able to iterate through jobs" do
+    finishing = true
+    group = Group.find_by(name: 'Cartel')
+    episode = Show.find_by(name: 'Visible Show').current_unreleased_episode
+    member = group.members.find_by(name: 'Desch')
+    position = group.positions.find_by(name: 'Translator')
+
+    new_member = Member.create(name: 'Test', group: group, discord: 'test')
+    Staff.create(episode: episode, position: position, member: new_member)
+
+    staff = episode.find_staff_for_member_and_position!(member, position, finishing)
+    assert_equal "Fyurie", staff.member.name
+
+    staff.update(finished: true)
+    staff = episode.find_staff_for_member_and_position!(member, position, finishing)
+    assert_equal "Test", staff.member.name
+  end
 end

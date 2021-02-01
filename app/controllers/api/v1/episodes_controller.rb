@@ -5,6 +5,7 @@ module Api
       include ApiResponses
 
       respond_to :json
+      protect_from_forgery with: :null_session
 
       def update
         @group = Group.find_by!(token: params[:group_token])
