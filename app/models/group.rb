@@ -70,7 +70,7 @@ class Group < ApplicationRecord
     result = shows.visible.joins(:terms).where('lower(terms.name) = ?', name.downcase).first
     return result unless result.nil?
 
-    results = self.shows.visible.search(name).with_pg_search_rank
+    results = shows.visible.where('lower(shows.name) LIKE ?', "%#{ApplicationRecord::sanitize_sql_like(name.downcase)}%")
 
     case results.length
     when 0

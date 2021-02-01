@@ -6,7 +6,6 @@ gem 'rexml' # Temporary until next version of rails
 
 gem 'rails', '~> 6.1.1'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'pg_search'
 gem 'puma', '~> 5.1'
 
 gem 'sass-rails', '>= 6'

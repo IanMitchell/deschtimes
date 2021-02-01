@@ -15,8 +15,6 @@
 #  index_shows_on_visible  (visible)
 #
 class Show < ApplicationRecord
-  include PgSearch::Model
-
   after_create :create_episodes
   before_save :touch_groups
   before_destroy :destroy_poster
@@ -32,8 +30,6 @@ class Show < ApplicationRecord
   has_many :terms, dependent: :destroy
   has_many :episodes, -> { order(number: :asc) }, dependent: :destroy
   has_one_attached :poster
-
-  pg_search_scope :search, against: [:name]
 
   validates :name, presence: true
 
