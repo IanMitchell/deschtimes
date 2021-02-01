@@ -11,7 +11,7 @@ class EpisodesController < ApplicationController
   end
 
   def index
-    @episodes = @show.episodes.order(number: :asc).includes(staff: :position)
+    @episodes = @show.episodes.includes(staff: :position)
   end
 
   def show
