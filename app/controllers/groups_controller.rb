@@ -1,10 +1,9 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_group!, only: [:show, :update, :destroy]
 
   before_action do
-    authenticate_user!
-
     add_breadcrumb "Groups", groups_url
   end
 
