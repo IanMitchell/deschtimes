@@ -137,16 +137,17 @@ class Show < ApplicationRecord
       air_date = Time.find_zone("Japan").parse(new_show_episode_air_date) || DateTime.now
 
       new_show_episode_count.to_i.clamp(0, 5_000).times do |index|
-        episode = Episode.new(
+        episode = Episode.create(
           show: self,
           number: index + offset,
           air_date: air_date + 1.week * index
         )
 
         new_show_staff.each do |staff|
-          episode.staff.build(
+          Staff.create(
             member: group.members.find(staff["member"].to_i),
-            position: group.positions.find(staff["position"].to_i)
+            position: group.positions.find(staff["position"].to_i),
+            episode: episode
           )
         end
       end
