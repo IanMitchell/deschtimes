@@ -19,6 +19,10 @@ module Api
           @episode = @show.current_unreleased_episode
         else
           @episode = @show.episodes.find_by(number: params[:episode_number])
+
+          if @episode.nil?
+            return error_response 404, "Could not find episode ##{params[:episode_number]}"
+          end
         end
 
         raise MemberNotFoundError if @member.nil?

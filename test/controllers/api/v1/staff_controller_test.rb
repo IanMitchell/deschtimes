@@ -219,4 +219,15 @@ class Api::V1::StaffControllerTest < ActionDispatch::IntegrationTest
     assert_equal true, tm_staff["finished"]
     assert_equal false, tl_staff["finished"]
   end
+
+  test "should fail for invalid future episide numbers" do
+    group = Group.find_by(name: "Cartel")
+    member = group.members.find_by(name: 'Desch')
+    show = Show.find_by(name: 'Visible Show')
+    show.episodes.find_by(number: 3).update(air_date: DateTime.now - 3.seconds)
+
+    patch api_v1_group_show_staff_url(group.token, 'Visible Show', member: member.discord, position: 'TM', finished: true, episode_number: 300), as: :json
+    assert_response :not_found
+    assert_equal "Could not find episode #300", response.parsed_body["message"]
+  end
 end
