@@ -1,6 +1,7 @@
 json.id show.id
 json.name show.name
-json.status show.progress_label
+json.status show.status
+json.progress show.progress_label
 json.created_at show.created_at
 json.updated_at show.updated_at
 
