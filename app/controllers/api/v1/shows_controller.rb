@@ -8,7 +8,7 @@ module Api
 
       def show
         @group = Group.find_by!(token: params[:group_token])
-        @show = @group.priority_show_search!(URI.decode_www_form_component(params[:name]))
+        @show = Show.includes(episodes: [staff: [:position, member: [:group]]]).find(@group.priority_show_search!(URI.decode_www_form_component(params[:name])).id)
       end
     end
   end

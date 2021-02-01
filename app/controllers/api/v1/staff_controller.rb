@@ -35,6 +35,7 @@ module Api
         if @staff.finished == finished
           error_response 400, "Your position is already marked as #{finished ? 'complete' : 'incomplete'}."
         elsif @staff.update(finished: finished)
+          @show = Show.includes(episodes: [staff: [:position, member: [:group]]]).find(@show.id)
           render 'api/v1/shows/show'
         else
           error_response 500, "Error updating #{@show.name}"

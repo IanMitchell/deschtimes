@@ -23,6 +23,7 @@ module Api
         end
 
         @show.current_unreleased_episode.update(released: true)
+        @show = Show.includes(episodes: [staff: [:position, member: [:group]]]).find(@show.id)
         render 'api/v1/shows/show'
       end
     end
