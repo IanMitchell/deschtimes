@@ -22,8 +22,8 @@ class EpisodesController < ApplicationController
 
   def new
     @episode = Episode.new(
-      number: @show.last_episode.number + 1,
-      air_date: @show.last_episode.air_date + 1.week
+      number: (@show.last_episode&.number || 0) + 1,
+      air_date: (@show.last_episode&.air_date || DateTime.now) + 1.week
     )
   end
 

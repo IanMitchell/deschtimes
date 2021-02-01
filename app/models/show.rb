@@ -82,8 +82,8 @@ class Show < ApplicationRecord
   end
 
   def season
-    season_start = first_episode.season
-    season_end = last_episode.season
+    season_start = first_episode&.season
+    season_end = last_episode&.season
 
     if season_start == season_end
       season_start
@@ -137,7 +137,8 @@ class Show < ApplicationRecord
       air_date = Time.find_zone("Japan").parse(new_show_episode_air_date) || DateTime.now
 
       new_show_episode_count.to_i.clamp(0, 5_000).times do |index|
-        episode = episodes.build(
+        episode = Episode.new(
+          show: self,
           number: index + offset,
           air_date: air_date + 1.week * index
         )
