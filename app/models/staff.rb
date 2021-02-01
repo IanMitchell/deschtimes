@@ -47,7 +47,7 @@ class Staff < ApplicationRecord
       thumbnail = Rails.application.routes.url_helpers.rails_blob_url(episode.show.poster, disposition: "attachment") if episode.show.poster.attached?
 
       embed = Discord::Embed.new do
-        title staff.episode.show.name
+        title "#{staff.episode.show.name} Episode ##{staff.episode.number}"
         color staff.finished ? 0x008000 : 0x800000
         timestamp DateTime.now
         thumbnail url: thumbnail
