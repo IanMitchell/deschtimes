@@ -8,9 +8,10 @@ class ShowsController < ApplicationController
   end
 
   def index
-    @airing = @group.shows.airing
-    @active = @group.shows.active.where.not(id: @airing)
-    @finished = @group.shows.finished
+    shows = @group.shows.with_attached_poster.includes(:episodes)
+    @airing = shows.airing
+    @active = shows.active.where.not(id: @airing)
+    @finished = shows.finished
   end
 
   def show
