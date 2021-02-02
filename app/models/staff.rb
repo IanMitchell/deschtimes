@@ -56,13 +56,8 @@ class Staff < ApplicationRecord
 
         description staff.episode.show.status if staff.episode.show.status?
 
-        add_field name: staff.position.name,
-                  value: staff.finished ? "✅ Finished!" : "❌ Unfinished.",
-                  inline: true
-
-        add_field name: 'Current Status',
+        add_field name: staff.finished ? "✅ #{staff.position.name}" : "❌ #{staff.position.name}",
                   value: staff.episode.discord_status_label.join(" "),
-                  inline: true
       end
 
       Webhook.discord.where(group: episode.show.groups).each do |webhook|
