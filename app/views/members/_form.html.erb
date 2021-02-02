@@ -24,6 +24,9 @@
         <%# <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs"> %>
         <div class="max-w-lg sm:max-w-xs">
           <%= render partial: 'forms/text_input', locals: { f: f, record: @member, key: :discord } %>
+          <p class="text-sm pt-1 text-gray-500">
+            <a class="text-indigo-600" href="https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-">How to find a user's Discord ID</a>
+          </p>
         </div>
       </div>
     </div>
