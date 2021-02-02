@@ -57,7 +57,7 @@ class Staff < ApplicationRecord
         description staff.episode.show.status if staff.episode.show.status?
 
         add_field name: staff.position.name,
-                  value: staff.finished ? "✅" : "❌",
+                  value: staff.finished ? "✅ Finished!" : "❌ Unfinished.",
                   inline: true
 
         add_field name: 'Current Status',
