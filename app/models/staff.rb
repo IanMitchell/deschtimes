@@ -45,6 +45,7 @@ class Staff < ApplicationRecord
 
       staff = self
       thumbnail = Rails.application.routes.url_helpers.rails_blob_url(episode.show.poster, disposition: "attachment") if episode.show.poster.attached?
+      title = staff.finished ? "✅ #{staff.position.name}" : "❌ #{staff.position.name}"
 
       embed = Discord::Embed.new do
         title "#{staff.episode.show.name} Episode ##{staff.episode.number}"
@@ -56,8 +57,8 @@ class Staff < ApplicationRecord
 
         description staff.episode.show.status if staff.episode.show.status?
 
-        add_field name: staff.finished ? "✅ #{staff.position.name}" : "❌ #{staff.position.name}",
-                  value: staff.episode.discord_status_label.join(" "),
+        add_field name: title,
+                  value: staff.episode.discord_status_label.join(" ")
       end
 
       Webhook.discord.where(group: episode.show.groups).each do |webhook|
