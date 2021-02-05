@@ -1,4 +1,11 @@
 json.id group.id
 json.name group.name
 json.acronym group.acronym
-json.icon group.icon.attached? ? url_for(group.icon) : nil
+
+if group.icon.attached?
+  # Circumvent redirects
+  json.icon group.icon.blob.service_url if Rails.env.production?
+  json.icon url_for(group.icon) unless Rails.env.production?
+else
+  json.icon nil
+end
