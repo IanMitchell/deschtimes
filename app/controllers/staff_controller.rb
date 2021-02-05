@@ -57,6 +57,6 @@ class StaffController < ApplicationController
 
   private
     def staff_params
-    params.require(:staff).permit(:member, :position, :finished)
+    params.require(:staff).permit(:member_id, :position_id, :finished)
   end
 end

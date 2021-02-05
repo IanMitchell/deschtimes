@@ -26,19 +26,19 @@
 
   <div class="mt-6 sm:mt-5">
     <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-      <%= f.label :member, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+      <%= f.label :member_id, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
       <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-          <%= f.select :member, @group.members.map {|member| [member.name, member.id]}, {selected: @staff.member.id}, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
+          <%= f.select :member_id, @group.members.map {|member| [member.name, member.id]}, {selected: @staff.member.id}, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
         </div>
       </div>
     </div>
 
     <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-      <%= f.label :position, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+      <%= f.label :position_id, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
       <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-          <%= f.select :position, @group.positions.map {|position| [position.name, position.id]}, {selected: @staff.position.id}, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
+          <%= f.select :position_id, @group.positions.map {|position| [position.name, position.id]}, {selected: @staff.position.id}, {class: "mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"} %>
         </div>
       </div>
     </div>
