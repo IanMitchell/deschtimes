@@ -90,7 +90,6 @@ class Group < ApplicationRecord
     def create_default_positions
       Position.create([
         { name: "Translator", acronym: "TL", group: self },
-        { name: "Translator Check", acronym: "TLC", group: self },
         { name: "Editor", acronym: "ED", group: self },
         { name: "Timer", acronym: "TM", group: self },
         { name: "Typesetter", acronym: "TS", group: self },
