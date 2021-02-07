@@ -55,6 +55,16 @@ class Episode < ApplicationRecord
     air_date <= DateTime.now
   end
 
+  def remaining_staff_positions
+    unfinished = staff.where(finished: false)
+
+    if unfinished.size > 0
+      unfinished.map(&:position).map(&:acronym).to_sentence
+    else
+      "None!"
+    end
+  end
+
   def discord_status_label
     staff.map do |staff|
       key = staff.position.acronym
