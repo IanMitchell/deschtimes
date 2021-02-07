@@ -29,7 +29,7 @@
           <% end %>
         </div>
         <div class="text-lg text-gray-500 leading-7">
-          <p>There is no status message.</p>
+          <p><%= show.status || "There is no status message." %></p>
           <p class="text-sm">Last updated <%= local_time_ago(show.updated_at) %>.</p>
         </div>
       </div>

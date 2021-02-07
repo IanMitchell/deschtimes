@@ -15,6 +15,8 @@
 #  index_shows_on_visible  (visible)
 #
 class Show < ApplicationRecord
+  include NormalizeBlankValues
+
   after_create :create_episodes
   before_save :touch_groups
   before_destroy :destroy_poster
