@@ -1,4 +1,4 @@
-<tr class="bg-white" data-sortable-update-url="<%= group_position_url(@group, position) %>">
+<tr class="bg-white" data-sortable-update-url="<%= group_position_url(group, position) %>">
   <td>
     <svg class="handle w-4 h-4 mr-auto ml-auto cursor-move" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -11,9 +11,9 @@
     <%= position.acronym %>
   </td>
   <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-    <%= link_to "Edit", edit_group_position_url(@group, position), class: "text-indigo-600 hover:text-indigo-900" %>
+    <%= link_to "Edit", edit_group_position_url(group, position), class: "text-indigo-600 hover:text-indigo-900" %>
   </td>
   <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-    <%= link_to "Delete", group_position_url(@group, position), method: :delete, data: { confirm: "Do you wish to delete #{position.name}? This will also delete all staff positions associated with it!" }, class: "text-red-600 hover:text-red-900" %>
+    <%= link_to "Delete", group_position_url(group, position), method: :delete, data: { confirm: "Do you wish to delete #{position.name}? This will also delete all staff positions associated with it!" }, class: "text-red-600 hover:text-red-900" %>
   </td>
 </tr>

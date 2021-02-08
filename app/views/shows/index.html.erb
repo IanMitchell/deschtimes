@@ -36,7 +36,7 @@
       <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Airing</h2>
 
       <ul class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0">
-        <%= render partial: 'shows/show', collection: @airing, cached: true %>
+        <%= render partial: 'shows/show', collection: @airing, cached: true, locals: { group: @group } %>
       </ul>
     <% end %>
 
@@ -44,7 +44,7 @@
       <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Active</h2>
 
       <ul class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0">
-        <%= render partial: 'shows/show', collection: @active, cached: true %>
+        <%= render partial: 'shows/show', collection: @active, cached: true, locals: { group: @group } %>
       </ul>
     <% end %>
 
@@ -52,7 +52,7 @@
       <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Finished</h2>
 
       <ul class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0">
-        <%= render partial: 'shows/show', collection: @finished, cached: true %>
+        <%= render partial: 'shows/show', collection: @finished, cached: true, locals: { group: @group } %>
       </ul>
     <% end %>
   </div>

@@ -106,13 +106,13 @@
       </div>
 
       <template data-target="addable.template">
-        <%= render 'staff/staff_form', form: f, selected_position: @group.positions.first %>
+        <%= render 'staff/staff_form', form: f, selected_position: @group.positions.first, group: @group %>
       </template>
 
       <div data-target="addable.container">
         <% @group.positions.each do |preselected_position| %>
           <%= f.fields_for "new_show_staff[]", Staff.new(position: preselected_position) do |f_staff| %>
-            <%= render 'staff/staff_form', form: f_staff, selected_position: preselected_position %>
+            <%= render 'staff/staff_form', form: f_staff, selected_position: preselected_position, group: @group %>
           <% end %>
         <% end %>
       </div>

@@ -1,4 +1,4 @@
-<%= form_with model: @group, local: true do |f| %>
+<%= form_with model: group, local: true do |f| %>
   <h3 class="text-lg leading-6 font-medium text-gray-900">
     Information
   </h3>
@@ -6,7 +6,7 @@
     Group names and acronyms must be unique. Webhooks will use your icon as the message avatar.
   </p>
 
-  <%= render partial: "layouts/errors", locals: { record: @group } %>
+  <%= render partial: "layouts/errors", locals: { record: group } %>
 
   <div class="mt-12">
     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
@@ -23,7 +23,7 @@
       <div class="mt-1 sm:mt-0 sm:col-span-2">
         <%# <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs"> %>
         <div class="max-w-lg sm:max-w-xs">
-          <%= render partial: 'forms/text_input', locals: { f: f, record: @group, key: :acronym } %>
+          <%= render partial: 'forms/text_input', locals: { f: f, record: group, key: :acronym } %>
         </div>
       </div>
     </div>
@@ -43,13 +43,13 @@
       <span class="inline-flex rounded-md shadow-sm">
         <%= link_to "Cancel", groups_url, class: "py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out" %>
       </span>
-      <% unless @group.new_record? %>
+      <% unless group.new_record? %>
         <span class="ml-3 inline-flex rounded-md shadow-sm">
-          <%= link_to "Delete Group", group_url(@group), method: :delete, data: { confirm: "Are you sure you wish to delete this group? This action is irreversible." }, class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition duration-150 ease-in-out" %>
+          <%= link_to "Delete Group", group_url(group), method: :delete, data: { confirm: "Are you sure you wish to delete this group? This action is irreversible." }, class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition duration-150 ease-in-out" %>
         </span>
       <% end %>
       <span class="ml-3 inline-flex rounded-md shadow-sm">
-        <%= f.submit @group.new_record? ? "Create Group" : "Edit Group", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+        <%= f.submit group.new_record? ? "Create Group" : "Edit Group", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
       </span>
     </div>
   </div>

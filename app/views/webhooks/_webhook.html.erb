@@ -11,9 +11,9 @@
     </span>
   </td>
   <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-    <%= link_to "Edit", edit_group_webhook_url(@group, webhook), class: "text-indigo-600 hover:text-indigo-900" %>
+    <%= link_to "Edit", edit_group_webhook_url(group, webhook), class: "text-indigo-600 hover:text-indigo-900" %>
   </td>
   <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-    <%= link_to "Delete", group_webhook_url(@group, webhook), method: :delete, data: { confirm: "Do you wish to delete #{webhook.name}?" }, class: "text-red-600 hover:text-red-900" %>
+    <%= link_to "Delete", group_webhook_url(group, webhook), method: :delete, data: { confirm: "Do you wish to delete #{webhook.name}?" }, class: "text-red-600 hover:text-red-900" %>
   </td>
 </tr>

@@ -25,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'projects/project', collection: @pending, cached: true, locals: { delete: false } %>
+              <%= render partial: 'projects/project', collection: @pending, cached: true, locals: { group: @group, delete: false } %>
             </tbody>
           </table>
         </div>
@@ -49,7 +49,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'projects/project', collection: @declined, cached: true, locals: { delete: true } %>
+              <%= render partial: 'projects/project', collection: @declined, cached: true, locals: { group: @group, delete: true } %>
             </tbody>
           </table>
         </div>
@@ -73,7 +73,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'projects/project', collection: @accepted, cached: true, locals: { delete: true } %>
+              <%= render partial: 'projects/project', collection: @accepted, cached: true, locals: { group: @group, delete: true } %>
             </tbody>
           </table>
         </div>

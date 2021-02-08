@@ -79,4 +79,7 @@ Rails.application.configure do
 
   # Active Storage links for Webhooks
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+  # Enable cache logging
+  config.action_controller.enable_fragment_cache_logging = true
 end
