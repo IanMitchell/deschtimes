@@ -11,7 +11,7 @@ module Api
       end
 
       def show
-        @group = Group.find_by!(token: params[:token])
+        @group = Group.includes(:projects, all_shows: [episodes: [staff: [:position, member: [:group]]]]).find_by!(token: params[:token])
       end
     end
   end
