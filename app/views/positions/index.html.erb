@@ -26,7 +26,7 @@
               </tr>
             </thead>
             <tbody data-controller="sortable" data-sortable-resource-value="position" data-sortable-parameter-value="rank">
-              <%= render partial: 'positions/position', collection: @group.positions, cached: true, locals: { group: @group } %>
+              <%= render partial: 'positions/position', collection: @group.positions, cached: true %>
             </tbody>
           </table>
         </div>

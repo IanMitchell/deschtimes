@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'members/member', collection: @group.members.includes(:staff), cached: true, locals: { group: @group } %>
+              <%= render partial: 'members/member', collection: @group.members, cached: true %>
             </tbody>
           </table>
         </div>

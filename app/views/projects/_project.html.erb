@@ -12,11 +12,11 @@
   </td>
   <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
     <% if delete %>
-      <%= link_to "Delete", group_show_project_url(group, project.show, project), method: :delete, data: { confirm: "Do you wish to delete this joint? This allows you to be reinvited to a joint." }, class: "text-red-600 hover:text-red-900" %>
+      <%= link_to "Delete", group_show_project_url(@group, project.show, project), method: :delete, data: { confirm: "Do you wish to delete this joint? This allows you to be reinvited to a joint." }, class: "text-red-600 hover:text-red-900" %>
     <% else %>
-      <%= link_to "Accept", group_show_project_url(group, project.show, project, status: :accepted), method: :patch, class: "text-green-600 hover:text-green-900" %>
+      <%= link_to "Accept", group_show_project_url(@group, project.show, project, status: :accepted), method: :patch, class: "text-green-600 hover:text-green-900" %>
       <span class="p-2">|</span>
-      <%= link_to "Decline", group_show_project_url(group, project.show, project, status: :declined), method: :patch, data: { confirm: "Are you sure you want to decline this joint?" }, class: "text-pink-600 hover:text-pink-900" %>
+      <%= link_to "Decline", group_show_project_url(@group, project.show, project, status: :declined), method: :patch, data: { confirm: "Are you sure you want to decline this joint?" }, class: "text-pink-600 hover:text-pink-900" %>
     <% end %>
   </td>
 </tr>

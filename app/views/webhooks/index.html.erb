@@ -28,7 +28,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'webhooks/webhook', collection: @group.webhooks, cached: true, locals: { group: @group } %>
+              <%= render partial: 'webhooks/webhook', collection: @group.webhooks, cached: true %>
             </tbody>
           </table>
         </div>
