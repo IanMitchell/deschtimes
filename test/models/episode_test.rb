@@ -92,4 +92,21 @@ class EpisodeTest < ActiveSupport::TestCase
     staff = episode.find_staff_for_member_and_position!(member, position, finishing)
     assert_equal "Test", staff.member.name
   end
+
+  test "should prioritize member group for unfinished jobs" do
+    finishing = true
+    group = Group.find_by(name: 'Cartel')
+    position = group.positions.find_by(acronym: 'TM')
+    episode = Show.find_by(name: 'Joint Show').current_unreleased_episode
+    member = group.members.find_by(name: 'Desch')
+
+    Staff.create(position: position, member: member, episode: episode)
+
+    staff = episode.find_staff_for_member_and_position!(member, Position.where(acronym: 'TM'), finishing)
+    assert_equal group, staff.member.group
+
+    staff.update(finished: true)
+    staff = episode.find_staff_for_member_and_position!(member, Position.where(acronym: 'TM'), finishing)
+    assert_equal Group.find_by(name: 'Trinity'), staff.member.group
+  end
 end

@@ -39,14 +39,14 @@ class Position < ApplicationRecord
                         message: "Position Acronyms must be unique."
                       }
 
-  def self.find_by_name_or_acronym!(value)
-    position = where(
+  def self.where_name_or_acronym_equals!(value)
+    positions = where(
       'lower(name) = ? OR lower(acronym) = ?',
       value.downcase,
       value.downcase
-    ).first
+    )
 
-    raise PositionNotFoundError if position.nil?
-    return position
+    raise PositionNotFoundError if positions.size == 0
+    return positions
   end
 end

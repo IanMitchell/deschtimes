@@ -234,8 +234,8 @@ class Api::V1::StaffControllerTest < ActionDispatch::IntegrationTest
   test 'should match all positions for joint show' do
     group = Group.find_by(name: 'Trinity')
     position = Position.create(name: 'Unique Job', acronym: 'UJ', group: group)
-    show = Show.find_by(name: 'Joint Show')
-    Staff.create(position: position, member: group.members.first, episode: show.episodes.first)
+    episode = Show.find_by(name: 'Joint Show').current_unreleased_episode
+    Staff.create(position: position, member: group.members.first, episode: episode)
 
     joint_group = Group.find_by(name: 'Cartel')
     admin = joint_group.members.find_by(name: 'Desch')
@@ -247,10 +247,10 @@ class Api::V1::StaffControllerTest < ActionDispatch::IntegrationTest
   test 'should prioritize local positions for joint show' do
     group = Group.find_by(name: 'Cartel')
     position = group.positions.find_by(acronym: 'TM')
-    show = Show.find_by(name: 'Joint Show')
+    episode = Show.find_by(name: 'Joint Show').current_unreleased_episode
     member = group.members.find_by(name: 'Desch')
 
-    Staff.create(position: position, member: member, episode: show.episodes.first)
+    Staff.create(position: position, member: member, episode: episode)
 
     joint_group = Group.find_by(name: 'Trinity')
 
@@ -263,7 +263,7 @@ class Api::V1::StaffControllerTest < ActionDispatch::IntegrationTest
     patch api_v1_group_show_staff_url(group.token, 'Joint Show', member: member.discord, position: 'TM', finished: true), as: :json
     assert_response :success
     episode = response.parsed_body["episodes"].find { |item| item["number"] == 1 }
-    staff = episode["staff"].select { |item| item["finished"] == true }
-    assert_equal joint_group.positions.find_by(acronym: "TM").id, staff[1]["position"]["id"]
+    staff = episode["staff"].find { |item| item["position"]["id"] == joint_group.positions.find_by(acronym: "TM").id }
+    assert_equal true, staff["finished"]
   end
 end

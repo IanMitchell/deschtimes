@@ -24,21 +24,26 @@ require 'test_helper'
 
 class PositionTest < ActiveSupport::TestCase
   test "should match against acronyms" do
-    position = Group.find_by(name: 'Cartel').positions.find_by_name_or_acronym!("TL")
+    position = Group.find_by(name: 'Cartel').positions.where_name_or_acronym_equals!("TL").first
     assert_equal "Translator", position.name
     assert_equal "TL", position.acronym
   end
 
   test "should match against names" do
-    position = Group.find_by(name: 'Cartel').positions.find_by_name_or_acronym!("Timer")
+    position = Group.find_by(name: 'Cartel').positions.where_name_or_acronym_equals!("Timer").first
     assert_equal "Timer", position.name
     assert_equal "TM", position.acronym
   end
 
   test "should raise an exception when no position found" do
     assert_raises PositionNotFoundError do
-      Group.find_by(name: 'Cartel').positions.find_by_name_or_acronym!("Nonexistant")
+      Group.find_by(name: 'Cartel').positions.where_name_or_acronym_equals!("Nonexistant")
     end
+  end
+
+  test "should find all matches" do
+    positions = Position.where_name_or_acronym_equals!("Timer")
+    assert_equal 2, positions.size
   end
 
   test "should not allow spaces in acronym" do
