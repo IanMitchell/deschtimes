@@ -27,7 +27,7 @@ class Group < ApplicationRecord
   has_many :authorized_users, dependent: :destroy
   has_many :users, through: :authorized_users
   has_many :projects, dependent: :destroy
-  has_many :all_shows, through: :projects, source: :show
+  has_many :all_shows, through: :projects
   has_many :positions, -> { order(rank: :asc) }, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :webhooks, dependent: :destroy
