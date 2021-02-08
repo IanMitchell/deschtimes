@@ -72,8 +72,8 @@ class Episode < ApplicationRecord
     end
   end
 
-  def find_staff_for_member_and_position!(member, position, finished)
-    results = staff.where(position: position)
+  def find_staff_for_member_and_position!(member, positions, finished)
+    results = staff.where(position: positions).reorder(id: :asc).distinct
     raise EpisodePositionStaffNotFoundError if results.empty?
 
     results = results.where(member: member) unless member.admin?
@@ -86,6 +86,10 @@ class Episode < ApplicationRecord
     else
       # Prioritize specific job
       job = results.where(member: member, finished: !finished).first
+      return job unless job.nil?
+
+      # Prioritize in-group positions
+      job = results.includes(:position).where(finished: !finished, position: { group: member.group }).first
       return job unless job.nil?
 
       # Return first matching results

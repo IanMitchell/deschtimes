@@ -67,6 +67,6 @@ joint_episode_one_tl:
 
 joint_episode_one_tm:
   member: trinity_levi
-  position: timer
+  position: trinity_timer
   episode: joint_episode_one
   finished: false

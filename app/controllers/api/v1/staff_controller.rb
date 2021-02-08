@@ -29,8 +29,8 @@ module Api
         raise UnairedEpisodeError unless @episode.aired?
         raise ShowFinishedError if @show.finished?
 
-        @position = @group.positions.find_by_name_or_acronym!(params[:position])
-        @staff = @episode.find_staff_for_member_and_position!(@member, @position, finished)
+        @positions = Position.where_name_or_acronym_equals!(params[:position]).where(group: @show.groups)
+        @staff = @episode.find_staff_for_member_and_position!(@member, @positions, finished)
 
         if @staff.finished == finished
           error_response 400, "Your position is already marked as #{finished ? 'complete' : 'incomplete'}."
