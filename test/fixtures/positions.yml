@@ -32,3 +32,9 @@ timer:
   acronym: TM
   group: cartel
   rank: 2
+
+trinity_timer:
+  name: Timer
+  acronym: TM
+  group: trinity
+  rank: 1
