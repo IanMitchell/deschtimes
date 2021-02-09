@@ -17,7 +17,7 @@ class EpisodesController < ApplicationController
   def show
     add_breadcrumb "Episodes", group_show_episodes_url(@group, @show)
 
-    @episode = @show.episodes.includes(staff: [:position, :member]).find(params[:id])
+    @episode = @show.episodes.includes(staff: [:position, member: [:group]]).find(params[:id])
   end
 
   def new
