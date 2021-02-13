@@ -139,19 +139,23 @@ class Show < ApplicationRecord
       offset = new_show_episode_number_start.to_i.abs
       air_date = Time.find_zone("Japan").parse(new_show_episode_air_date) || DateTime.now
 
-      new_show_episode_count.to_i.clamp(0, 5_000).times do |index|
+      new_show_episode_count.to_i.clamp(1, 5_000).times do |index|
         episode = Episode.create(
           show: self,
           number: index + offset,
           air_date: air_date + 1.week * index
         )
 
-        new_show_staff.each do |staff|
-          Staff.create(
-            member: group.members.find(staff["member"].to_i),
-            position: group.positions.find(staff["position"].to_i),
-            episode: episode
-          )
+        (new_show_staff || []).each do |staff|
+          begin
+            Staff.create(
+              member: group.members.find(staff["member"].to_i),
+              position: group.positions.find(staff["position"].to_i),
+              episode: episode
+            )
+          rescue => e
+            # Likely empty staff; just allow to fail silently
+          end
         end
       end
 
