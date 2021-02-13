@@ -17,6 +17,8 @@
 #  index_groups_on_slug     (slug) UNIQUE
 #  index_groups_on_token    (token) UNIQUE
 #
+require 'net/http'
+
 class Group < ApplicationRecord
   extend FriendlyId
 
@@ -107,7 +109,8 @@ class Group < ApplicationRecord
 
     def trigger_webhooks
       webhooks.vercel.each do |webhook|
-        VercelWebhookJob.perform_later(webhook)
+        # VercelWebhookJob.perform_later(webhook)
+        Net::HTTP.post(URI(webhook.url), nil)
       end
     end
 end

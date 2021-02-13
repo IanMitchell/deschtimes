@@ -19,7 +19,12 @@ module ActiveStorage
 
       headers = public? ? { "x-amz-acl" => "public-read" } : {}
 
-      headers.merge({ "Content-Type" => content_type, "Content-MD5" => checksum, "Content-Disposition" => content_disposition })
+      headers.merge({
+        "Content-Type" => content_type,
+        "Content-MD5" => checksum,
+        "Content-Disposition" => content_disposition,
+        "Content-Length-Range" => 0..(10*1024*1024),
+      })
     end
 
     private

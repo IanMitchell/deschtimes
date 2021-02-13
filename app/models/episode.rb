@@ -150,7 +150,11 @@ class Episode < ApplicationRecord
           avatar = Rails.application.routes.url_helpers.rails_blob_url(webhook.group.icon, disposition: "attachment")
         end
 
-        DiscordWebhookJob.perform_later(webhook, embed.to_json, avatar)
+        # DiscordWebhookJob.perform_later(webhook, embed.to_json, avatar)
+        Discord::Notifier.message embed,
+                                  username: webhook.name,
+                                  url: webhook.url,
+                                  avatar_url: avatar
       end
     end
 end
