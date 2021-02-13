@@ -68,7 +68,7 @@ class Staff < ApplicationRecord
           avatar = Rails.application.routes.url_helpers.rails_blob_url(webhook.group.icon, disposition: "attachment")
         end
 
-        DiscordWebhookJob.perform_later(webhook, embed, avatar)
+        DiscordWebhookJob.perform_later(webhook, embed.to_json, avatar)
       end
     end
 end
