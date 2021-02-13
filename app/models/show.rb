@@ -2,12 +2,13 @@
 #
 # Table name: shows
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  status     :text
-#  visible    :boolean
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :bigint           not null, primary key
+#  name           :string
+#  projects_count :integer          default(0), not null
+#  status         :text
+#  visible        :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 # Indexes
 #

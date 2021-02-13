@@ -8,9 +8,16 @@ class ProjectsController < ApplicationController
     add_breadcrumb "Groups", groups_url
     add_breadcrumb @group.name, group_url(@group)
 
-    @accepted = @group.projects.where(status: :accepted)
-    @declined = @group.projects.where(status: :declined)
-    @pending = @group.projects.where(status: :pending)
+    @accepted = @group.projects.includes(:group, :show)
+                               .joins(:show)
+                               .where(status: :accepted)
+                               .where("shows.projects_count > ?", 1)
+
+    @declined = @group.projects.includes(:group, :show)
+                               .joins(:show)
+                               .where(status: :declined)
+
+    @pending = @group.projects.includes(:group, :show).where(status: :pending)
   end
 
   def new
