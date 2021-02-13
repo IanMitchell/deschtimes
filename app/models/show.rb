@@ -19,7 +19,8 @@ class Show < ApplicationRecord
   include NormalizeBlankValues
 
   after_create :create_episodes
-  before_save :touch_groups
+  before_save :touch_groups, if: :finished?
+  after_touch :touch_groups
   before_destroy :destroy_poster
 
   attr_accessor :new_show_episode_count
@@ -125,9 +126,7 @@ class Show < ApplicationRecord
     # When a show is finished, we need to update counters on various UI elements.
     # To do this, we need to bust the cache
     def touch_groups
-      if finished?
-        groups.find_each(batch_size: 100) { |group| group.touch }
-      end
+      groups.each { |group| group.touch }
     end
 
     def destroy_poster

@@ -20,7 +20,7 @@
 #
 class Member < ApplicationRecord
   has_many :staff, dependent: :destroy
-  belongs_to :group
+  belongs_to :group, touch: true
 
   validates :discord, presence: true,
                       uniqueness: { scope: :group, message: "Member Discord IDs should be unique" }

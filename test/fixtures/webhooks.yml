@@ -19,3 +19,8 @@ discord:
   name: Announcement Notification
   url: http://localhost:3000/ping
   platform: 1
+
+vercel:
+  name: Widget Rebuild
+  url: http://localhost:3000/ping
+  platform: 2

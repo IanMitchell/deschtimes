@@ -28,5 +28,6 @@ class Webhook < ApplicationRecord
   enum platform: {
     generic: 0,
     discord: 1,
+    vercel: 2,
   }
 end

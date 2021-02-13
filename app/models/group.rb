@@ -22,6 +22,8 @@ class Group < ApplicationRecord
 
   before_validation :generate_token, on: :create
   after_create :create_default_positions
+  after_save :trigger_webhooks
+  after_touch :trigger_webhooks
   before_destroy :destroy_icon
 
   has_many :authorized_users, dependent: :destroy
@@ -101,5 +103,11 @@ class Group < ApplicationRecord
 
     def destroy_icon
       icon.purge_later
+    end
+
+    def trigger_webhooks
+      webhooks.vercel.each do |webhook|
+        VercelWebhookJob.perform_later(webhook)
+      end
     end
 end

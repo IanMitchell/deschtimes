@@ -3,6 +3,8 @@ module WebhooksHelper
     case platform
     when "discord"
       "bg-purple-100 text-purple-800"
+    when "vercel"
+      "bg-black text-white"
     when "generic"
     else
       "bg-gray-100 text-gray-800"

@@ -22,7 +22,7 @@
 #
 class Position < ApplicationRecord
   has_many :staff, dependent: :destroy
-  belongs_to :group
+  belongs_to :group, touch: true
 
   acts_as_list scope: :group, column: :rank
 
