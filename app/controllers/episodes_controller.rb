@@ -58,6 +58,13 @@ class EpisodesController < ApplicationController
   end
 
   def destroy
+    @episode = @show.episodes.find(params[:id])
+
+    if @episode.destroy
+      redirect_to group_show_episodes_url(@group, @show), notice: "#{@show.name} episode #{@episode.number} Deleted"
+    else
+      redirect_to group_show_episode_url(@group, @show, @episode), notice: "#{@show.name} episode #{@episode.number} could not be deleted."
+    end
   end
 
   private
