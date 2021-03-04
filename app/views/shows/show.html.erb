@@ -90,9 +90,9 @@
         </div>
       </dt>
       <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-        <% if @show.projects.size > 1 %>
+        <% if @show.projects.where.not(status: :declined).size > 1 %>
           <ul class="border border-gray-200 rounded-md">
-            <% @show.projects.where.not(projects: { group: @group }).each_with_index do |project, index| %>
+            <% @show.projects.where.not(group: @group).where.not(status: :declined).each_with_index do |project, index| %>
               <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5 <%= "border-t border-gray-200" if index > 0 %>">
                 <div class="w-0 flex-1 flex items-center">
                   <%= render partial: 'groups/icon', locals: { group: project.group, width: "w-5", height: "h-5" } %>

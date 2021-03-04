@@ -29,4 +29,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    uniqueness: true
+
+  def shows
+    Show.includes(:projects).where(projects: { groups: groups }).distinct
+  end
 end

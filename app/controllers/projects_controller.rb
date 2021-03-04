@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    unless current_user.groups.exists? @project.group.id
+    unless current_user.shows.exists? @project.show.id
       redirect_to root_url, alert: "You can't modify that show!"
     end
 
