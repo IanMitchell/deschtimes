@@ -26,8 +26,8 @@ module Api
         end
 
         raise MemberNotFoundError if @member.nil?
-        raise UnairedEpisodeError unless @episode.aired?
         raise ShowFinishedError if @show.finished?
+        raise UnairedEpisodeError unless @episode.aired?
 
         @positions = Position.where_name_or_acronym_equals!(params[:position]).where(group: @show.groups)
         @staff = @episode.find_staff_for_member_and_position!(@member, @positions, finished)
