@@ -19,7 +19,7 @@ class Show < ApplicationRecord
   include NormalizeBlankValues
 
   after_create :create_episodes
-  before_save :touch_groups, if: :finished?
+  before_save :touch_groups
   after_touch :touch_groups
   before_destroy :destroy_poster
 
