@@ -7,7 +7,7 @@ json.updated_at show.updated_at
 
 if show.poster.attached?
   # Circumvent redirects
-  json.poster show.poster.blob.service_url if Rails.env.production?
+  json.poster show.poster.blob.url if Rails.env.production?
   json.poster url_for(show.poster) unless Rails.env.production?
 else
   json.poster nil

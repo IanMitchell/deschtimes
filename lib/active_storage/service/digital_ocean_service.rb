@@ -26,10 +26,20 @@ module ActiveStorage
       })
     end
 
+
     private
       def object_for(key)
         path = root.present? ? File.join(root, key) : key
         bucket.object(path)
+      end
+
+      def public_url(key, **)
+        if ENV['ACTIVE_STORAGE_CDN'].present?
+          url = object_for(key).public_url
+          "#{ENV['ACTIVE_STORAGE_CDN']}/#{URI(url).path}"
+        else
+          object_for(key).public_url
+        end
       end
   end
 end
