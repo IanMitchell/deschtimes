@@ -2,29 +2,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  direct :cdn_proxy do |model, options|
-    if model.respond_to?(:signed_id)
-      route_for(
-        :rails_service_blob_proxy,
-        model.signed_id,
-        model.filename,
-        options.merge(host: ENV['ACTIVE_STORAGE_CDN'])
-      )
-    else
-      signed_blob_id = model.blob.signed_id
-      variation_key  = model.variation.key
-      filename       = model.blob.filename
-
-      route_for(
-        :rails_blob_representation_proxy,
-        signed_blob_id,
-        variation_key,
-        filename,
-        options.merge(host: ENV['ACTIVE_STORAGE_CDN'])
-      )
-    end
-  end if ENV['ACTIVE_STORAGE_CDN'].present?
-
   namespace :api do
     namespace :v1 do
       resources :groups, only: [:index, :show], param: :token do
