@@ -33,5 +33,8 @@ module Deschtimes
 
     # Set default timezone to JST
     config.time_zone = 'Japan'
+
+    # Enable CDN
+    config.active_storage.resolve_model_to_route = :cdn_proxy if ENV['ACTIVE_STORAGE_CDN'].present?
   end
 end
