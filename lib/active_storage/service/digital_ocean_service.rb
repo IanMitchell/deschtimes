@@ -36,7 +36,7 @@ module ActiveStorage
       def public_url(key, **)
         if ENV['ACTIVE_STORAGE_CDN'].present?
           url = object_for(key).public_url
-          "#{ENV['ACTIVE_STORAGE_CDN']}/#{URI(url).path}"
+          "#{ENV['ACTIVE_STORAGE_CDN']}#{URI(url).path}"
         else
           object_for(key).public_url
         end
