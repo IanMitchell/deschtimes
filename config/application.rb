@@ -17,7 +17,7 @@ module Deschtimes
     # the framework and any gems in your application.
 
     # Background jobs
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
 
     # Disable generated helper files
     config.generators.assets = false
