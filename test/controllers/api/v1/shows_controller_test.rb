@@ -48,4 +48,13 @@ class Api::V1::ShowsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "Saenai Heroine no Sodatekata ♭", response.parsed_body["name"]
   end
+
+  test "should return a list of visible shows" do
+    group = Group.find_by(name: 'Cartel')
+    get api_v1_group_shows_url(group.token), as: :json
+    assert_response :success
+    show = response.parsed_body["shows"].first
+    assert_equal("Visible Show", show["name"])
+    assert_equal([{"name" => "public"}], show["terms"])
+  end
 end
