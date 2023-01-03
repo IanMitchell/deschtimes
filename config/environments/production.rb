@@ -123,6 +123,17 @@ Rails.application.configure do
   # Devise Emails
   config.action_mailer.default_url_options = { host: 'deschtimes.com' }
 
+  # Sendgrid Configuration
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'apikey',
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => 'deschtimes.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
   # Active Storage links for Webhooks
   Rails.application.routes.default_url_options[:host] = 'deschtimes.com'
 end
