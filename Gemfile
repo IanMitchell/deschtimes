@@ -33,6 +33,8 @@ gem "aws-sdk-s3", require: false
 
 gem 'acts_as_list'
 
+gem "resend"
+
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
